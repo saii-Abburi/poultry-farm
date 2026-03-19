@@ -9,6 +9,10 @@ const connectDB = async () => {
         const maskedUri = uri.replace(/\/\/([^:]+):([^@]+)@/, '//\$1:****@');
         console.log(`\x1b[36mℹ Attempting to connect to MongoDB: ${maskedUri}\x1b[0m`);
 
+        if (mongoose.connection.readyState >= 1) {
+            return;
+        }
+
         // Removed explicit dbName option here because it's already in the URI
         // Mongoose handles it better when it's just in the string
         const conn = await mongoose.connect(uri);

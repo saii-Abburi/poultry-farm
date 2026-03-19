@@ -15,47 +15,49 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Connect to Database and start server
-const startServer = async () => {
+// App Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// CORS - allow the Vite dev server and any local frontend
+app.use(cors({
+    origin: (origin, callback) => callback(null, true),
+    credentials: true,
+}));
+
+app.use(helmet({
+    contentSecurityPolicy: false,
+}));
+app.use(morgan('dev'));
+
+// Database Connection Middleware - Ensure DB is connected before handling requests
+app.use(async (req, res, next) => {
     try {
         await connectDB();
-        
-        // Middleware
-        app.use(express.json());
-        app.use(express.urlencoded({ extended: true }));
-
-        // CORS - allow the Vite dev server and any local frontend
-        app.use(cors({
-            origin: [
-                'http://localhost:5173',
-                'http://localhost:3000',
-                'http://127.0.0.1:5173',
-            ],
-            credentials: true,
-        }));
-
-        app.use(helmet());
-        app.use(morgan('dev'));
-
-        // Routes
-        app.use('/auth', authRoutes);
-        app.use('/products', productRoutes);
-
-        // Error Middleware
-        app.use(errorHandler);
-
-        app.get('/', (req, res) => {
-            res.send('Poultry Farm API is running');
-        });
-
-        app.listen(port, () => {
-            console.log(`\x1b[32m✔ Server is running at http://localhost:${port}\x1b[0m`);
-            console.log(`\x1b[34mℹ Mode: Development\x1b[0m`);
-        });
+        next();
     } catch (error) {
-        console.error(`\x1b[31m✘ Critical Error: ${error.message}\x1b[0m`);
-        process.exit(1);
+        next(error);
     }
-};
+});
 
-startServer();
+// Routes
+app.use('/auth', authRoutes);
+app.use('/products', productRoutes);
+
+// Root route
+app.get('/', (req, res) => {
+    res.json({ message: 'Poultry Farm API is running', env: process.env.NODE_ENV });
+});
+
+// Error Middleware
+app.use(errorHandler);
+
+// Only listen if NOT running on Vercel
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
+    app.listen(port, () => {
+        console.log(`\x1b[32m✔ Server is running at http://localhost:${port}\x1b[0m`);
+    });
+}
+
+// Export for Vercel
+module.exports = app;
