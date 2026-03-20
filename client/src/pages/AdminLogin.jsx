@@ -22,6 +22,8 @@ const AdminLogin = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      console.log(api);
+      
       const { data } = await api.post('/auth/admin/login', { email, password });
       
       // LocalStorage payload
