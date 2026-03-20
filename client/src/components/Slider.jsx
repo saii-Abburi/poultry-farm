@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
-  'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=1600&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=1600&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=1600&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=1600&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=1600&auto=format&fit=crop', // Big farm
+  'https://images.unsplash.com/photo-1598965402089-897ce52e8355?q=80&w=1600&auto=format&fit=crop', // Premium Hen
+  'https://images.unsplash.com/photo-1548442816-ce54be704770?q=80&w=1600&auto=format&fit=crop', // Rooster
+  'https://images.unsplash.com/photo-1518296996677-789a74fb1c32?q=80&w=1600&auto=format&fit=crop', // Chicks
 ];
 
 const Slider = () => {

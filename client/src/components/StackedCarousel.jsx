@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const products = [
   {
@@ -36,11 +37,12 @@ const products = [
     name: 'White Leghorn Hen',
     category: 'Hens',
     price: '₹480',
-    image: 'https://images.unsplash.com/photo-1598965402089-897ce52e8355?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1548443916-2917e9232ff4?q=80&w=1000&auto=format&fit=crop',
   },
 ];
 
 const StackedCarousel = () => {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
@@ -122,7 +124,7 @@ const StackedCarousel = () => {
               viewport={{ once: true }}
               className="text-4xl md:text-6xl font-black font-heading tracking-tight text-[#FFC107] mb-4"
             >
-              OUR PRODUCT'S
+              OUR PRODUCTS
             </motion.h2>
             <motion.div 
               initial={{ scaleX: 0 }}
@@ -186,7 +188,7 @@ const StackedCarousel = () => {
                       <div className="flex items-center justify-between mt-2 sm:mt-4">
                         <span className="text-xl sm:text-2xl font-black text-[#8b0000]">{product.price}</span>
                         <button className="bg-[#FFC107] text-gray-900 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold hover:bg-yellow-500 transition-colors shadow-sm">
-                          ORDER
+                          {t('Order Now')}
                         </button>
                       </div>
                     </div>

@@ -16,7 +16,7 @@ const resources = {
       "Contact Us": "Contact Us",
       "Quick Links": "Quick Links",
       "Location": "Location",
-      "Order Now": "Order Now via WhatsApp"
+      "Order Now": "ORDER ON WHATSAPP"
     }
   },
   te: {
@@ -33,7 +33,7 @@ const resources = {
       "Contact Us": "మమ్మల్ని సంప్రదించండి",
       "Quick Links": "వేగవంతమైన లింకులు",
       "Location": "స్థానం",
-      "Order Now": "వాట్సాప్ ద్వారా ఆర్డర్ చేయండి"
+      "Order Now": "వాట్సాప్‌లో ఆర్డర్ చేయండి"
     }
   }
 };

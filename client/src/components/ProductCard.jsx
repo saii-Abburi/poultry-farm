@@ -18,12 +18,14 @@ const ProductCard = ({ product }) => {
       className="group relative bg-white rounded-2xl sm:rounded-[2.5rem] overflow-hidden shadow-premium hover:shadow-premium-hover transition-all duration-500 border border-gray-100/50 flex flex-col h-full"
     >
       {/* Image Section */}
-      <Link to={`/products/${product.category}/${product._id}`} className="block relative aspect-[1/1] overflow-hidden bg-earth">
-        <motion.img 
-          src={product.images[0] || 'https://via.placeholder.com/600?text=Premium+Poultry'} 
-          alt={product.name}
-          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
-        />
+      <div className="relative aspect-[1/1] overflow-hidden bg-earth">
+        <Link to={`/products/${product.category}/${product._id}`} className="block h-full">
+          <motion.img 
+            src={product.images[0] || 'https://via.placeholder.com/600?text=Premium+Poultry'} 
+            alt={product.name}
+            className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+          />
+        </Link>
         
         {/* Badges */}
         <div className="absolute top-2 left-2 sm:top-5 sm:left-5 flex flex-col gap-1 sm:gap-2 z-10">
@@ -44,14 +46,13 @@ const ProductCard = ({ product }) => {
             target="_blank"
             rel="noreferrer"
             className="flex items-center justify-center gap-1 sm:gap-2 w-full bg-primary text-white py-1.5 sm:py-4 rounded-md sm:rounded-2xl font-bold text-[9px] sm:text-sm shadow-xl shadow-primary/20 hover:bg-primary-dark transition-colors"
-            onClick={(e) => e.stopPropagation()}
           >
             <MessageCircle className="w-3 h-3 sm:w-[18px] sm:h-[18px]" />
             <span className="hidden sm:inline">Order on WhatsApp</span>
             <span className="sm:hidden">Order</span>
           </a>
         </div>
-      </Link>
+      </div>
       
       {/* Content Section */}
       <div className="p-2.5 sm:p-8 flex flex-col flex-grow">
